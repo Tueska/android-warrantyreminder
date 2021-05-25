@@ -47,7 +47,7 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 WarrantyEntry we = MainActivity.sql.getProduct(1);
                 List<WarrantyEntry> wes = MainActivity.sql.getAllProducts();
-                System.out.println(wes.toString());
+                binding.textviewFirst.setText(wes.toString());
             }
         });
     }
