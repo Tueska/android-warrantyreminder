@@ -65,6 +65,7 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
                 DataModel.store = DataModel.secondFragment.store.getText().toString();
                 DataModel.warrantyLength = Integer.parseInt(DataModel.secondFragment.warrantyTime.getText().toString());
 
+                DataModel.reset();
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
@@ -73,6 +74,7 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
         binding.buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DataModel.reset();
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
@@ -92,7 +94,6 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        System.out.println("POSITION:\t" + position);
         DataModel.warrantyLengthType = position;
     }
 

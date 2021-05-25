@@ -23,7 +23,8 @@ public class DataModel {
 
     public static SecondFragment secondFragment;
 
-    public void dumpDB() {
+    public static void dumpDB() {
+
 
     }
 
