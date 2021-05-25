@@ -23,11 +23,6 @@ public class DataModel {
 
     public static SecondFragment secondFragment;
 
-    public static void dumpDB() {
-
-
-    }
-
     public static void reset() {
         dateYear = 0;
         dateMonth = 0;

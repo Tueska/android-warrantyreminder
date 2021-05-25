@@ -69,8 +69,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         we.setId(Integer.parseInt(cursor.getString(0)));
         we.setProduct(cursor.getString(1));
         we.setStore(cursor.getString(2));
-        we.setPurchaseDate(Integer.parseInt(cursor.getString(3)));
-        we.setWarrantyExpireDate(Integer.parseInt(cursor.getString(4)));
+        we.setPurchaseDate(Long.parseLong(cursor.getString(3)));
+        we.setWarrantyExpireDate(Long.parseLong(cursor.getString(4)));
         // TODO: Maybe DB Connection schließen
         return we;
     }
@@ -87,8 +87,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 we.setId(Integer.parseInt(cursor.getString(0)));
                 we.setProduct(cursor.getString(1));
                 we.setStore(cursor.getString(2));
-                we.setPurchaseDate(Integer.parseInt(cursor.getString(3)));
-                we.setWarrantyExpireDate(Integer.parseInt(cursor.getString(4)));
+                we.setPurchaseDate(Long.parseLong(cursor.getString(3)));
+                we.setWarrantyExpireDate(Long.parseLong(cursor.getString(4)));
 
                 wes.add(we);
             } while(cursor.moveToNext());

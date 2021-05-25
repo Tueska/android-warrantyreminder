@@ -4,14 +4,14 @@ public class WarrantyEntry {
     private int id;
     protected String product;
     protected String store;
-    protected int purchaseDate;
-    protected int warrantyExpireDate;
+    protected long purchaseDate;
+    protected long warrantyExpireDate;
 
     public WarrantyEntry() {
 
     }
 
-    public WarrantyEntry(String product, String store, int purchaseDate, int warrantyExpireDate) {
+    public WarrantyEntry(String product, String store, long purchaseDate, long warrantyExpireDate) {
         this.product = product;
         this.store = store;
         this.purchaseDate = purchaseDate;
@@ -43,19 +43,19 @@ public class WarrantyEntry {
         this.store = store;
     }
 
-    public int getPurchaseDate() {
+    public long getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(int purchaseDate) {
+    public void setPurchaseDate(long purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
-    public int getWarrantyExpireDate() {
+    public long getWarrantyExpireDate() {
         return warrantyExpireDate;
     }
 
-    public void setWarrantyExpireDate(int warrantyExpireDate) {
+    public void setWarrantyExpireDate(long warrantyExpireDate) {
         this.warrantyExpireDate = warrantyExpireDate;
     }
 }
