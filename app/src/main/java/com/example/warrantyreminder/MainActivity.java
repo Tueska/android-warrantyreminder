@@ -23,6 +23,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    public static SQLiteHelper sql;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        this.sql = new SQLiteHelper(this);
 
         setSupportActionBar(binding.toolbar);
 

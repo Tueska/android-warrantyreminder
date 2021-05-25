@@ -58,10 +58,10 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
             @Override
             public void onClick(View view) {
                 // TODO: HIER SPEICHERN ALLA
-//                if(DataModel.secondFragment.product.getText().toString().matches("")) {
-//                    Snackbar.make(view, "No information entered!", Snackbar.LENGTH_SHORT).show();
-//                    return;
-//                }
+                if(DataModel.secondFragment.product.getText().toString().matches("")) {
+                    Snackbar.make(view, "No information entered!", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
                 DataModel.warrantyLength = Integer.valueOf(DataModel.secondFragment.warrantyTime.getText().toString());
                 dumpDB();
 
@@ -91,6 +91,8 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
                         break;
                 }
                 we.setWarrantyExpireDate(cal.getTime().getTime());
+
+                MainActivity.sql.addProduct(we);
 
                 System.out.println("PRODUCT:\t" + we.getProduct() + "\nSTORE:\t" + we.getStore() + "\nPURCHASE DATE:\t" + we.getPurchaseDate() + "\nEXPIRE DATE:\t" + we.getWarrantyExpireDate());
             }

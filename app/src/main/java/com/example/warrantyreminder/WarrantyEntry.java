@@ -1,5 +1,7 @@
 package com.example.warrantyreminder;
 
+import androidx.annotation.NonNull;
+
 public class WarrantyEntry {
     private int id;
     protected String product;
@@ -57,5 +59,11 @@ public class WarrantyEntry {
 
     public void setWarrantyExpireDate(long warrantyExpireDate) {
         this.warrantyExpireDate = warrantyExpireDate;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "[ID:" + this.getId() + ", PRODUCT: " + this.getProduct() + ", STORE: " + this.getStore() + ", PURCHASEDATE: " + this.getPurchaseDate() + ", EXPIREDATE: " + this.getWarrantyExpireDate() + "]";
     }
 }
