@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 
+import java.util.Date;
+
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     private TextView dateDisplay;
@@ -26,6 +28,9 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        // Do something with the date chosen by the user
+        DataModel.dateYear = year;
+        DataModel.dateMonth = month + 1;
+        DataModel.dateDayOfMonth = day;
+        DataModel.secondFragment.update();
     }
 }

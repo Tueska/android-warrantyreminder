@@ -38,6 +38,17 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
+
+        binding.textviewFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("----------------------------------------");
+                System.out.println(DataModel.dateDayOfMonth + "\t\t" + DataModel.dateMonth + "\t\t" + DataModel.dateYear);
+                System.out.println(DataModel.product + "\t\t" + DataModel.store);
+                System.out.println(DataModel.warrantyLength + "\t\t" + DataModel.warrantyLengthType);
+                System.out.println("----------------------------------------");
+            }
+        });
     }
 
     @Override
