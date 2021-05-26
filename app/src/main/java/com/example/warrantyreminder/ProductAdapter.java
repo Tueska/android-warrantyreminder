@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -85,6 +89,20 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
 
         viewHolder.namePurchaseDate.setText("Purchase: " + new SimpleDateFormat("dd MMMM yyyy").format(purchaseDate.getTime()));
         viewHolder.nameRemainingTime.setText(String.format("%s", diff >= 0 ? Long.valueOf(diff) + "d" : "Exp"));
+
+        viewHolder.productBackdrop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("product", we.getProduct());
+                bundle.putString("store", we.getStore());
+                bundle.putString("color", we.getColor());
+                bundle.putLong("purchaseDate", we.getPurchaseDate());
+                bundle.putLong("expireDate", we.getWarrantyExpireDate());
+                NavHostFragment.findNavController(DataModel.firstFragment)
+                        .navigate(R.id.action_FirstFragment_to_DeleteFragment, bundle);
+            }
+        });
     }
 
     // Returns the total count of items in the list

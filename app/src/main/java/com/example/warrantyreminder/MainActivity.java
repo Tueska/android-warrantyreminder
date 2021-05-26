@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDatePickerDialog(View view) {
-        DialogFragment newFragment = new DatePickerFragment();
+        DialogFragment newFragment = new DatePickerFragment(view);
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
         cp.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
             @Override
             public void onChooseColor(int position, int color) {
-                ImageView iv = DataModel.secondFragment.getView().findViewById(R.id.colorPurchaseDate);
+                ImageView iv = view.getRootView().findViewById(R.id.colorPurchaseDate);
                 iv.setColorFilter(Color.parseColor(al.get(position)));
-                iv = DataModel.secondFragment.getView().findViewById(R.id.colorPicker);
+                iv = view.getRootView().findViewById(R.id.colorPicker);
                 iv.setColorFilter(Color.parseColor(al.get(position)));
 
                 DataModel.color = al.get(position);

@@ -38,9 +38,12 @@ public class FirstFragment extends Fragment {
 
         RecyclerView sv = (RecyclerView) getView().findViewById(R.id.productList);
         List<WarrantyEntry> products = MainActivity.sql.getAllProducts();
+
         this.productAdapter = new ProductAdapter(products);
         sv.setAdapter(this.productAdapter);
         sv.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        DataModel.firstFragment = this;
 
         binding.fabCreate.setOnClickListener(new View.OnClickListener() {
             @Override

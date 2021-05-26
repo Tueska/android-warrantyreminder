@@ -22,6 +22,7 @@ public class DataModel {
     public static int warrantyLength;
     public static int warrantyLengthType;
 
+    public static FirstFragment firstFragment;
     public static SecondFragment secondFragment;
 
     public static void reset() {
