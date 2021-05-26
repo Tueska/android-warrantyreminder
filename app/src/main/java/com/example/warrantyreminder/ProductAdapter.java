@@ -78,7 +78,7 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
 
         viewHolder.nameProduct.setText(we.getProduct());
         viewHolder.nameStore.setText(we.getStore());
-        viewHolder.productBackdrop.setColorFilter(Color.parseColor(we.getColor()));
+        viewHolder.productBackdrop.setBackgroundTintList(ColorStateList.valueOf(we.getColor()));
 
         // Date calculation
         Calendar purchaseDate = Calendar.getInstance();
@@ -94,11 +94,14 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
+                bundle.putInt("id", we.getId());
                 bundle.putString("product", we.getProduct());
                 bundle.putString("store", we.getStore());
-                bundle.putString("color", we.getColor());
+                bundle.putInt("color", we.getColor());
                 bundle.putLong("purchaseDate", we.getPurchaseDate());
                 bundle.putLong("expireDate", we.getWarrantyExpireDate());
+                bundle.putInt("warrantyLength", we.getWarrantyLength());
+                bundle.putInt("warrantyLengthType", we.getWarrantyTypeLength());
                 NavHostFragment.findNavController(DataModel.firstFragment)
                         .navigate(R.id.action_FirstFragment_to_DeleteFragment, bundle);
             }

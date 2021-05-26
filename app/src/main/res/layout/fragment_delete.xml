@@ -25,7 +25,8 @@
         android:layout_width="373dp"
         android:layout_height="158dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/rectangle"
+        android:background="@drawable/rectangle"
+        android:backgroundTint="@color/cp_slate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -200,8 +201,9 @@
         android:layout_width="373dp"
         android:layout_height="43dp"
         android:layout_marginTop="48dp"
+        android:background="@drawable/rectangle"
+        android:backgroundTint="@color/cp_slate"
         android:onClick="showColorPickerDialog"
-        android:src="@drawable/rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputWarrantySpinner"
@@ -214,9 +216,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="12dp"
-        android:tint="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/colorPurchaseDate"
         app:layout_constraintTop_toTopOf="@+id/colorPurchaseDate"
-        app:srcCompat="@drawable/ic_delete" />
+        app:srcCompat="@drawable/ic_delete"
+        app:tint="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

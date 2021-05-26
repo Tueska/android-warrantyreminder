@@ -8,7 +8,9 @@ public class WarrantyEntry {
     protected String store;
     protected long purchaseDate;
     protected long warrantyExpireDate;
-    protected String color;
+    protected int color;
+    protected int warrantyLength;
+    protected int warrantyTypeLength;
 
     public WarrantyEntry() {
 
@@ -62,17 +64,35 @@ public class WarrantyEntry {
         this.warrantyExpireDate = warrantyExpireDate;
     }
 
-    public String getColor() {
+    public int getColor() {
         return this.color;
     }
 
-    public void setColor(String color) {
+    public int getWarrantyLength() {
+        return warrantyLength;
+    }
+
+    public void setWarrantyLength(int warrantyLength) {
+        this.warrantyLength = warrantyLength;
+    }
+
+    public int getWarrantyTypeLength() {
+        return warrantyTypeLength;
+    }
+
+    public void setWarrantyTypeLength(int warrantyTypeLength) {
+        this.warrantyTypeLength = warrantyTypeLength;
+    }
+
+    public void setColor(int color) {
         this.color = color;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "[ID:" + this.getId() + ", PRODUCT: " + this.getProduct() + ", STORE: " + this.getStore() + ", PURCHASEDATE: " + this.getPurchaseDate() + ", EXPIREDATE: " + this.getWarrantyExpireDate() + ", COLOR: " + this.color + "]";
+        return "[ID:" + this.getId() + ", PRODUCT: " + this.getProduct() + ", STORE: " + this.getStore() +
+                ", PURCHASEDATE: " + this.getPurchaseDate() + ", EXPIREDATE: " + this.getWarrantyExpireDate() +
+                ", WARRANTYLENGTH: " + this.getWarrantyLength() + ", WARRANTYTYPE: " + this.getWarrantyTypeLength() + ", COLOR: " + this.color + "]";
     }
 }

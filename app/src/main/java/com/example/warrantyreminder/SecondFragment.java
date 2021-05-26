@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,6 +29,9 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
     private EditText store;
     private EditText warrantyTime;
     private Spinner warrantyLengthType;
+    private ImageView purchaseColor;
+
+    private int warrantyType;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.purchaseDate = getView().findViewById(R.id.inputPurchaseDate);
+        this.purchaseColor = getView().findViewById(R.id.colorPurchaseDate);
         this.product = getView().findViewById(R.id.inputProductName);
         this.store = getView().findViewById(R.id.inputStore);
         this.warrantyTime = getView().findViewById(R.id.inputWarrantyNumber);
@@ -59,7 +64,7 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
             public void onClick(View view) {
                 // TODO: HIER SPEICHERN ALLA
                 if(DataModel.secondFragment.product.getText().toString().matches("")) {
-                    Snackbar.make(view, "No information entered!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, "No product given!", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 DataModel.warrantyLength = Integer.valueOf(DataModel.secondFragment.warrantyTime.getText().toString());
@@ -76,7 +81,9 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
                 we.setStore(DataModel.secondFragment.store.getText().toString());
                 Date purchaseDate = new Date(DataModel.dateYear - 1900, DataModel.dateMonth - 1, DataModel.dateDayOfMonth);
                 we.setPurchaseDate(purchaseDate.getTime());
-                we.setColor(DataModel.color);
+                we.setColor(purchaseColor.getBackgroundTintList().getDefaultColor());
+                we.setWarrantyLength(Integer.parseInt(warrantyTime.getText().toString()));
+                we.setWarrantyTypeLength(warrantyType);
 
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(purchaseDate);
@@ -120,14 +127,10 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        DataModel.warrantyLengthType = position;
+        warrantyType = position;
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-    }
-
-    public void update() {
-        this.purchaseDate.setText(new SimpleDateFormat("dd MMMM yyyy").format(new Date(DataModel.dateYear - 1900, DataModel.dateMonth - 1, DataModel.dateDayOfMonth)));
     }
 }

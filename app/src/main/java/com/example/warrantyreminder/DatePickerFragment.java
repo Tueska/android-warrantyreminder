@@ -45,6 +45,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         Calendar pd = Calendar.getInstance();
         pd.set(year, month, day);
         TextView tv = this.mView.findViewById(R.id.inputPurchaseDate);
+        tv.setHint(Long.toString(pd.getTime().getTime()));
         tv.setText(new SimpleDateFormat("dd MMMM yyyy").format(pd.getTime()));
     }
 }

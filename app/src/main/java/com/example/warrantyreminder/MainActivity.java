@@ -1,5 +1,6 @@
 package com.example.warrantyreminder;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -54,11 +55,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChooseColor(int position, int color) {
                 ImageView iv = view.getRootView().findViewById(R.id.colorPurchaseDate);
-                iv.setColorFilter(Color.parseColor(al.get(position)));
+                iv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
                 iv = view.getRootView().findViewById(R.id.colorPicker);
-                iv.setColorFilter(Color.parseColor(al.get(position)));
-
-                DataModel.color = al.get(position);
+                iv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
             }
 
             @Override
