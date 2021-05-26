@@ -26,10 +26,10 @@
         android:layout_height="158dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/rectangle"
-        android:tint="@color/cp_slate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/cp_slate" />
 
     <EditText
         android:id="@+id/inputProductName"
@@ -99,7 +99,8 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/colorPurchaseDate"
         app:layout_constraintTop_toTopOf="@+id/colorPurchaseDate"
-        app:layout_constraintVertical_bias="0.389" />
+        app:layout_constraintVertical_bias="0.389"
+        tools:ignore="OnClick" />
 
     <TextView
         android:id="@+id/textPurchaseDate"
@@ -178,9 +179,9 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_back"
-        android:tint="#FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/colorPurchaseDate"
-        app:layout_constraintTop_toTopOf="@+id/colorPurchaseDate" />
+        app:layout_constraintTop_toTopOf="@+id/colorPurchaseDate"
+        app:tint="@color/white" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -201,9 +202,10 @@
         android:layout_marginTop="48dp"
         android:onClick="showColorPickerDialog"
         android:src="@drawable/rectangle"
-        android:tint="@color/cp_slate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputWarrantySpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/inputWarrantySpinner"
+        app:tint="@color/cp_slate"
+        tools:ignore="OnClick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

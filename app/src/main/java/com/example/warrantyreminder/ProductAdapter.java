@@ -67,7 +67,6 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
         return viewHolder;
     }
 
-    // Daten in den ViewHolder
     @Override
     public void onBindViewHolder(ProductAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
@@ -75,19 +74,17 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
 
         viewHolder.nameProduct.setText(we.getProduct());
         viewHolder.nameStore.setText(we.getStore());
+        viewHolder.productBackdrop.setColorFilter(Color.parseColor(we.getColor()));
+
+        // Date calculation
         Calendar purchaseDate = Calendar.getInstance();
         Calendar expireDate = Calendar.getInstance();
         purchaseDate.setTimeInMillis(we.getPurchaseDate());
         expireDate.setTimeInMillis(we.getWarrantyExpireDate());
-
-        long diff = (expireDate.getTime().getTime() - purchaseDate.getTime().getTime()) / (1000 * 60 * 60 * 24);
+        long diff = TimeUnit.MILLISECONDS.toDays(expireDate.getTime().getTime() - Calendar.getInstance().getTime().getTime());
 
         viewHolder.namePurchaseDate.setText("Purchase: " + new SimpleDateFormat("dd MMMM yyyy").format(purchaseDate.getTime()));
-        viewHolder.nameRemainingTime.setText(Long.toString(diff) + 'd');
-
-        viewHolder.productBackdrop.setColorFilter(Color.parseColor(we.getColor()));
-        System.out.println("HEJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
-        System.out.println(Color.parseColor(we.getColor()));
+        viewHolder.nameRemainingTime.setText(String.format("%s", diff >= 0 ? Long.valueOf(diff) + "d" : "Exp"));
     }
 
     // Returns the total count of items in the list
