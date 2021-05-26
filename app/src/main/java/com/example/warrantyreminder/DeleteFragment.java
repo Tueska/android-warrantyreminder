@@ -92,7 +92,7 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
                 we.setId(valueId);
                 we.setProduct(viewProduct.getText().toString());
                 we.setStore(viewStore.getText().toString());
-                we.setColor(valueColor);
+                we.setColor(viewColor.getBackgroundTintList().getDefaultColor());
                 we.setWarrantyTypeLength(valueWarrantyLengthType);
                 we.setWarrantyLength(valueWarrantyLength);
 
