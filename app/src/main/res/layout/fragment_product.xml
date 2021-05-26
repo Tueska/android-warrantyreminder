@@ -9,10 +9,11 @@
 
     <ImageView
         android:id="@+id/product_Backdrop"
-        android:layout_width="337dp"
+        android:layout_width="330dp"
         android:layout_height="124dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:tint="@color/cp_slate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,6 +27,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
         android:text="Product Name"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/product_Backdrop"
@@ -38,16 +40,18 @@
         android:layout_height="18dp"
         android:layout_marginTop="4dp"
         android:text="Seller: Store"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/product_Backdrop"
         app:layout_constraintStart_toStartOf="@+id/product_Backdrop"
         app:layout_constraintTop_toBottomOf="@+id/product_Name" />
 
     <TextView
         android:id="@+id/product_PurchaseDate"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/editable_text_border"
+        android:backgroundTint="#121212"
         android:paddingLeft="25px"
         android:paddingRight="25px"
         android:text="Purchase: Date"
@@ -55,6 +59,7 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/product_Backdrop"
         app:layout_constraintEnd_toEndOf="@+id/product_Backdrop"
+        app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="@+id/product_Backdrop" />
 
     <TextView
@@ -62,13 +67,14 @@
         android:layout_width="75dp"
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="100d"
         android:textAlignment="textEnd"
         android:textColor="#838383"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/product_Backdrop"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

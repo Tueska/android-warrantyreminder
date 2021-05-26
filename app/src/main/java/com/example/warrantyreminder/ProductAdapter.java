@@ -1,6 +1,9 @@
 package com.example.warrantyreminder;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +11,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,11 +73,21 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
         // Get the data model based on position
         WarrantyEntry we = productList.get(position);
 
-//        TextView product = viewHolder.nameProduct;
         viewHolder.nameProduct.setText(we.getProduct());
         viewHolder.nameStore.setText(we.getStore());
-        viewHolder.namePurchaseDate.setText(Long.toString(we.getPurchaseDate()));
-        viewHolder.nameRemainingTime.setText(Long.toString(we.getWarrantyExpireDate()));
+        Calendar purchaseDate = Calendar.getInstance();
+        Calendar expireDate = Calendar.getInstance();
+        purchaseDate.setTimeInMillis(we.getPurchaseDate());
+        expireDate.setTimeInMillis(we.getWarrantyExpireDate());
+
+        long diff = (expireDate.getTime().getTime() - purchaseDate.getTime().getTime()) / (1000 * 60 * 60 * 24);
+
+        viewHolder.namePurchaseDate.setText("Purchase: " + new SimpleDateFormat("dd MMMM yyyy").format(purchaseDate.getTime()));
+        viewHolder.nameRemainingTime.setText(Long.toString(diff) + 'd');
+
+        viewHolder.productBackdrop.setColorFilter(Color.parseColor(we.getColor()));
+        System.out.println("HEJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
+        System.out.println(Color.parseColor(we.getColor()));
     }
 
     // Returns the total count of items in the list

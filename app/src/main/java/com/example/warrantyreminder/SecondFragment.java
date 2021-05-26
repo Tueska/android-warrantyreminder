@@ -76,6 +76,7 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
                 we.setStore(DataModel.secondFragment.store.getText().toString());
                 Date purchaseDate = new Date(DataModel.dateYear - 1900, DataModel.dateMonth - 1, DataModel.dateDayOfMonth);
                 we.setPurchaseDate(purchaseDate.getTime());
+                we.setColor(DataModel.color);
 
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(purchaseDate);
@@ -93,8 +94,6 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
                 we.setWarrantyExpireDate(cal.getTime().getTime());
 
                 MainActivity.sql.addProduct(we);
-
-                System.out.println("PRODUCT:\t" + we.getProduct() + "\nSTORE:\t" + we.getStore() + "\nPURCHASE DATE:\t" + we.getPurchaseDate() + "\nEXPIRE DATE:\t" + we.getWarrantyExpireDate());
             }
         });
 

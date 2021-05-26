@@ -8,6 +8,7 @@ public class WarrantyEntry {
     protected String store;
     protected long purchaseDate;
     protected long warrantyExpireDate;
+    protected String color;
 
     public WarrantyEntry() {
 
@@ -61,9 +62,17 @@ public class WarrantyEntry {
         this.warrantyExpireDate = warrantyExpireDate;
     }
 
+    public String getColor() {
+        return this.color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     @NonNull
     @Override
     public String toString() {
-        return "[ID:" + this.getId() + ", PRODUCT: " + this.getProduct() + ", STORE: " + this.getStore() + ", PURCHASEDATE: " + this.getPurchaseDate() + ", EXPIREDATE: " + this.getWarrantyExpireDate() + "]";
+        return "[ID:" + this.getId() + ", PRODUCT: " + this.getProduct() + ", STORE: " + this.getStore() + ", PURCHASEDATE: " + this.getPurchaseDate() + ", EXPIREDATE: " + this.getWarrantyExpireDate() + ", COLOR: " + this.color + "]";
     }
 }

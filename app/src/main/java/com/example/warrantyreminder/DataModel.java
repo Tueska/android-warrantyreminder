@@ -18,6 +18,7 @@ public class DataModel {
 
     public static String product;
     public static String store;
+    public static String color = "#2A2A2A";
     public static int warrantyLength;
     public static int warrantyLengthType;
 
@@ -28,6 +29,7 @@ public class DataModel {
         dateMonth = 0;
         dateDayOfMonth = 0;
 
+        color = "#2A2A2A";
         product = "";
         store = "";
         warrantyLengthType = 0;

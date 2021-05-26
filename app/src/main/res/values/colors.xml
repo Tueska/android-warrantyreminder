@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="cp_aqua">#38A18B</color>
+    <color name="cp_rhubarb">#CB7C7A</color>
+    <color name="cp_sand">#CDA35F</color>
+    <color name="cp_ocean">#266678</color>
+    <color name="cp_slate">#2A2A2A</color>
+    <color name="cp_red">#E20639</color>
+    <color name="cp_blue">#062E5F</color>
+    <color name="cp_gold">#FBA700</color>
+    <color name="cp_green">#3DDC84</color>
+    <color name="cp_lavender">#BE82CA</color>
 </resources>

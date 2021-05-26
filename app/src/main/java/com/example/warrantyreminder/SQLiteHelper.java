@@ -19,8 +19,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_STORE = "store";
     private static final String KEY_PURCHASE_DATE = "purchaseDate";
     private static final String KEY_WARRANTY_EXPIRE_DATE = "warrantyExpireDate";
+    private static final String KEY_COLOR = "color";
 
-    private static final String[] COLUMNS = {KEY_ID, KEY_PRODUCT, KEY_STORE, KEY_PURCHASE_DATE, KEY_WARRANTY_EXPIRE_DATE};
+    private static final String[] COLUMNS = {KEY_ID, KEY_PRODUCT, KEY_STORE, KEY_PURCHASE_DATE, KEY_WARRANTY_EXPIRE_DATE, KEY_COLOR};
 
     private static final int DATABSE_VERSION = 1;
 
@@ -33,7 +34,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_WARRANTY + " ( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                KEY_PRODUCT + " TEXT, " + KEY_STORE + " TEXT, " + KEY_PURCHASE_DATE + " INTEGER, " + KEY_WARRANTY_EXPIRE_DATE + " INTEGER" +
+                KEY_PRODUCT + " TEXT, " + KEY_STORE + " TEXT, " + KEY_PURCHASE_DATE + " INTEGER, " + KEY_WARRANTY_EXPIRE_DATE + " INTEGER, " + KEY_COLOR + " TEXT" +
                 " )";
         db.execSQL(CREATE_TABLE);
     }
@@ -53,6 +54,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_STORE, we.getStore());
         values.put(KEY_PURCHASE_DATE, we.getPurchaseDate());
         values.put(KEY_WARRANTY_EXPIRE_DATE, we.getWarrantyExpireDate());
+        values.put(KEY_COLOR, we.getColor());
 
         db.insert(TABLE_WARRANTY, null, values);
         db.close();
@@ -70,7 +72,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         we.setStore(cursor.getString(2));
         we.setPurchaseDate(Long.parseLong(cursor.getString(3)));
         we.setWarrantyExpireDate(Long.parseLong(cursor.getString(4)));
-        // TODO: Maybe DB Connection schließen
+        we.setColor(cursor.getString(5));
         return we;
     }
 
@@ -88,6 +90,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 we.setStore(cursor.getString(2));
                 we.setPurchaseDate(Long.parseLong(cursor.getString(3)));
                 we.setWarrantyExpireDate(Long.parseLong(cursor.getString(4)));
+                we.setColor(cursor.getString(5));
 
                 wes.add(we);
             } while(cursor.moveToNext());
@@ -103,6 +106,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_STORE, we.getStore());
         values.put(KEY_PURCHASE_DATE, we.getPurchaseDate());
         values.put(KEY_WARRANTY_EXPIRE_DATE, we.getWarrantyExpireDate());
+        values.put(KEY_COLOR, we.getColor());
 
         int i = db.update(TABLE_WARRANTY, values, KEY_ID + " = ?", new String[]{String.valueOf(we.getId())});
         db.close();

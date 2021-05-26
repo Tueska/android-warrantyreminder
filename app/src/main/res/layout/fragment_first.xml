@@ -20,14 +20,6 @@
         app:rippleColor="#fff"
         app:srcCompat="@drawable/ic_plus" />
 
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
-        android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteY="148dp" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productList"
         android:layout_width="match_parent"
