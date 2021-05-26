@@ -17,6 +17,7 @@
         app:backgroundTint="#3A71B2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="#fff"
         app:srcCompat="@drawable/ic_plus" />
 
     <TextView
@@ -25,6 +26,13 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_first_fragment"
         android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteY="148dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

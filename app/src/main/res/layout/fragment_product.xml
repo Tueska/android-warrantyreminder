@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/productfragment"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#121212">
+
+    <ImageView
+        android:id="@+id/product_Backdrop"
+        android:layout_width="337dp"
+        android:layout_height="124dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rectangle" />
+
+    <TextView
+        android:id="@+id/product_Name"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:text="Product Name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/product_Backdrop"
+        app:layout_constraintStart_toStartOf="@+id/product_Backdrop"
+        app:layout_constraintTop_toTopOf="@+id/product_Backdrop" />
+
+    <TextView
+        android:id="@+id/product_Store"
+        android:layout_width="300dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="4dp"
+        android:text="Seller: Store"
+        app:layout_constraintEnd_toEndOf="@+id/product_Backdrop"
+        app:layout_constraintStart_toStartOf="@+id/product_Backdrop"
+        app:layout_constraintTop_toBottomOf="@+id/product_Name" />
+
+    <TextView
+        android:id="@+id/product_PurchaseDate"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/editable_text_border"
+        android:paddingLeft="25px"
+        android:paddingRight="25px"
+        android:text="Purchase: Date"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/product_Backdrop"
+        app:layout_constraintEnd_toEndOf="@+id/product_Backdrop"
+        app:layout_constraintStart_toStartOf="@+id/product_Backdrop" />
+
+    <TextView
+        android:id="@+id/product_RemainingTime"
+        android:layout_width="75dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:text="100d"
+        android:textAlignment="textEnd"
+        android:textColor="#838383"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toEndOf="@+id/product_Backdrop"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

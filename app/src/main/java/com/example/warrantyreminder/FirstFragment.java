@@ -1,7 +1,6 @@
 package com.example.warrantyreminder;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +8,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warrantyreminder.databinding.FragmentFirstBinding;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.snackbar.SnackbarContentLayout;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
+    private ProductAdapter productAdapter;
 
     @Override
     public View onCreateView(
@@ -34,20 +32,21 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+//        List<WarrantyEntry> wes = MainActivity.sql.getAllProducts();
+//        binding.textviewFirst.setText(wes.toString());
+
+        RecyclerView sv = (RecyclerView) getView().findViewById(R.id.productList);
+        List<WarrantyEntry> products = MainActivity.sql.getAllProducts();
+        this.productAdapter = new ProductAdapter(products);
+        sv.setAdapter(this.productAdapter);
+        sv.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
         binding.fabCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
-
-        binding.textviewFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                WarrantyEntry we = MainActivity.sql.getProduct(1);
-                List<WarrantyEntry> wes = MainActivity.sql.getAllProducts();
-                binding.textviewFirst.setText(wes.toString());
             }
         });
     }

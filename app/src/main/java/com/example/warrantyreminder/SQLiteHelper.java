@@ -36,7 +36,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 KEY_PRODUCT + " TEXT, " + KEY_STORE + " TEXT, " + KEY_PURCHASE_DATE + " INTEGER, " + KEY_WARRANTY_EXPIRE_DATE + " INTEGER" +
                 " )";
         db.execSQL(CREATE_TABLE);
-
     }
 
     @Override
