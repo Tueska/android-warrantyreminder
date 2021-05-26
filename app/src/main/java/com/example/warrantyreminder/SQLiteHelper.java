@@ -126,6 +126,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     public void deleteProduct(WarrantyEntry we) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_WARRANTY, KEY_ID + " = ?", new String[]{String.valueOf(we.getId())});
+        db.delete(TABLE_WARRANTY, KEY_ID + " = ?", new String[]{Integer.toString(we.getId())});
+        db.close();
     }
 }

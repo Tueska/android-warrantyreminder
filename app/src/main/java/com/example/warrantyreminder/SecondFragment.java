@@ -36,7 +36,6 @@ public class SecondFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSecondBinding.inflate(inflater, container, false);
-        // DataModel.reset();
 
         return binding.getRoot();
 
