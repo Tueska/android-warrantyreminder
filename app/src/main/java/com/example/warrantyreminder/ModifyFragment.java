@@ -13,9 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.warrantyreminder.databinding.FragmentDeleteBinding;
+import com.example.warrantyreminder.databinding.FragmentModifyBinding;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -25,9 +24,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Calendar;
 
-public class DeleteFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class ModifyFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private FragmentDeleteBinding binding;
+    private FragmentModifyBinding binding;
 
     private String valueProduct;
     private String valueStore;
@@ -37,6 +36,7 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
     private int valueWarrantyLength;
     private int valueWarrantyLengthType;
     private int valueId;
+    private boolean valueModify;
 
     private ImageView viewColor;
     private ImageView viewPickerColor;
@@ -49,7 +49,7 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
     private EditText viewWarrantyLength;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentDeleteBinding.inflate(inflater, container, false);
+        binding = FragmentModifyBinding.inflate(inflater, container, false);
 
         this.valueProduct = getArguments().getString("product");
         this.valueStore = getArguments().getString("store");
@@ -59,6 +59,7 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
         this.valueId = getArguments().getInt("id");
         this.valueWarrantyLength = getArguments().getInt("warrantyLength");
         this.valueWarrantyLengthType = getArguments().getInt("warrantyLengthType");
+        this.valueModify = getArguments().getBoolean("delete");
 
         return binding.getRoot();
     }
@@ -73,8 +74,10 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
         this.viewBackButton = getView().findViewById(R.id.buttonReturn);
         this.viewWarrantyLengthType = getView().findViewById(R.id.inputWarrantySpinner);
         this.viewWarrantyLength = getView().findViewById(R.id.inputWarrantyNumber);
-        this.viewDeleteButton = getView().findViewById(R.id.deleteButton);
         this.viewBackButton = getView().findViewById(R.id.buttonReturn);
+
+        this.viewDeleteButton = getView().findViewById(R.id.deleteButton);
+        this.viewDeleteButton.setVisibility(this.valueModify ? View.VISIBLE : View.INVISIBLE);
 
 
 
@@ -122,11 +125,14 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
                 we.setWarrantyExpireDate(cal.getTime().getTime());
                 System.out.println(we);
 
-                MainActivity.sql.updateProduct(we);
+                if(valueModify) {
+                    MainActivity.sql.updateProduct(we);
+                } else {
+                    MainActivity.sql.addProduct(we);
+                }
+
 
                 getActivity().onBackPressed();
-//                NavHostFragment.findNavController(DeleteFragment.this)
-//                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
             }
         });
 
@@ -136,8 +142,6 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
                 we.setId(valueId);
                 MainActivity.sql.deleteProduct(we);
                 getActivity().onBackPressed();
-//                NavHostFragment.findNavController(DeleteFragment.this)
-//                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
             }
         });
 
@@ -145,8 +149,6 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
             @Override
             public void onClick(View v) {
                 getActivity().onBackPressed();
-//                NavHostFragment.findNavController(DeleteFragment.this)
-//                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
             }
         });
     }

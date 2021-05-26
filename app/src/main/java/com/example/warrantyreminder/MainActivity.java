@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
         cp.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
             @Override
             public void onChooseColor(int position, int color) {
-                ImageView iv = view.getRootView().findViewById(R.id.colorPurchaseDate);
-                iv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
-                iv = view.getRootView().findViewById(R.id.colorPicker);
-                iv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
+                ImageView colors = view.getRootView().findViewById(R.id.colorPurchaseDate);
+                colors.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
+                colors = view.getRootView().findViewById(R.id.colorPicker);
+                colors.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
             }
 
             @Override

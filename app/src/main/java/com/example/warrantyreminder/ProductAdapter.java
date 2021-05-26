@@ -99,8 +99,9 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
                 bundle.putLong("expireDate", we.getWarrantyExpireDate());
                 bundle.putInt("warrantyLength", we.getWarrantyLength());
                 bundle.putInt("warrantyLengthType", we.getWarrantyTypeLength());
+                bundle.putBoolean("delete", true);
                 NavHostFragment.findNavController(parentFragment)
-                        .navigate(R.id.action_FirstFragment_to_DeleteFragment, bundle);
+                        .navigate(R.id.action_FirstFragment_to_modifyFragment, bundle);
             }
         });
     }

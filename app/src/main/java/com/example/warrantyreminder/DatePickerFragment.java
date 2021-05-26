@@ -39,9 +39,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        DataModel.dateYear = year;
-        DataModel.dateMonth = month + 1;
-        DataModel.dateDayOfMonth = day;
         Calendar pd = Calendar.getInstance();
         pd.set(year, month, day);
         TextView tv = this.mView.findViewById(R.id.inputPurchaseDate);

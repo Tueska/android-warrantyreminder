@@ -1,5 +1,6 @@
 package com.example.warrantyreminder;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warrantyreminder.databinding.FragmentFirstBinding;
+
+import java.util.Date;
 import java.util.List;
 
 public class FirstFragment extends Fragment {
@@ -40,13 +43,16 @@ public class FirstFragment extends Fragment {
         sv.setAdapter(this.productAdapter);
         sv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        DataModel.firstFragment = this;
-
         binding.fabCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("color", R.color.cp_slate);
+                bundle.putLong("purchaseDate", new Date().getTime());
+                bundle.putInt("warrantyLength", 2);
+                bundle.putBoolean("delete", false);
                 NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_FirstFragment_to_modifyFragment, bundle);
             }
         });
     }
