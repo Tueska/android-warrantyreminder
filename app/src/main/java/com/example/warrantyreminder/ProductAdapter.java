@@ -101,7 +101,7 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
                 bundle.putInt("warrantyLengthType", we.getWarrantyTypeLength());
                 bundle.putBoolean("delete", true);
                 NavHostFragment.findNavController(parentFragment)
-                        .navigate(R.id.action_FirstFragment_to_modifyFragment, bundle);
+                        .navigate(R.id.action_productListFragment_to_modifyFragment, bundle);
             }
         });
     }

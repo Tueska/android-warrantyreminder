@@ -48,16 +48,16 @@ public class MainActivity extends AppCompatActivity {
         cp.setTitle("Choose a nice color");
         cp.setColors(this.colorList);
 
-        ArrayList<String> al = this.colorList;
+        ArrayList<String> colorList = this.colorList;
 
         cp.show();
         cp.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
             @Override
             public void onChooseColor(int position, int color) {
                 ImageView colors = view.getRootView().findViewById(R.id.colorPurchaseDate);
-                colors.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
+                colors.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(colorList.get(position))));
                 colors = view.getRootView().findViewById(R.id.colorPicker);
-                colors.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
+                colors.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(colorList.get(position))));
             }
 
             @Override
@@ -79,5 +79,10 @@ public class MainActivity extends AppCompatActivity {
         this.colorList.add("#3DDC84");
         this.colorList.add("#BE82CA");
         this.colorList.add("#E20639");
+        this.colorList.add("#585481");
+        this.colorList.add("#568EA5");
+        this.colorList.add("#4B3B47");
+        this.colorList.add("#36151E");
+        this.colorList.add("#F08C8E");
     }
 }

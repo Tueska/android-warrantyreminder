@@ -40,6 +40,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 KEY_WARRANTY_LENGTH + " INTEGER, " + KEY_WARRANTY_TYPE + " INTEGER, " + KEY_COLOR + " INTEGER" +
                 " )";
         db.execSQL(CREATE_TABLE);
+        db.close();
     }
 
     @Override
@@ -47,6 +48,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         String DROP_IF_EXIST = "DROP TABLE IF EXISTS " + TABLE_WARRANTY;
         db.execSQL(DROP_IF_EXIST);
         this.onCreate(db);
+        db.close();
     }
 
     public void addProduct(WarrantyEntry we) {
@@ -80,6 +82,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         we.setWarrantyLength(cursor.getInt(5));
         we.setWarrantyTypeLength(cursor.getInt(6));
         we.setColor(cursor.getInt(7));
+        db.close();
         return we;
     }
 
@@ -104,6 +107,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 wes.add(we);
             } while(cursor.moveToNext());
         }
+        db.close();
         return wes;
     }
 
