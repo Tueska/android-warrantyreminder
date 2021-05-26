@@ -41,6 +41,7 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
     private ImageView viewColor;
     private ImageView viewPickerColor;
     private ImageView viewBackButton;
+    private ImageView viewDeleteButton;
     private EditText viewProduct;
     private EditText viewStore;
     private TextView viewPurchaseDate;
@@ -72,6 +73,9 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
         this.viewBackButton = getView().findViewById(R.id.buttonReturn);
         this.viewWarrantyLengthType = getView().findViewById(R.id.inputWarrantySpinner);
         this.viewWarrantyLength = getView().findViewById(R.id.inputWarrantyNumber);
+        this.viewDeleteButton = getView().findViewById(R.id.deleteButton);
+        this.viewBackButton = getView().findViewById(R.id.buttonReturn);
+
 
 
         this.viewColor.setBackgroundTintList(ColorStateList.valueOf(this.valueColor));
@@ -82,6 +86,7 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
         this.viewWarrantyLengthType.setOnItemSelectedListener(this);
         this.viewWarrantyLengthType.setSelection(this.valueWarrantyLengthType);
         this.viewWarrantyLength.setText(Integer.toString(this.valueWarrantyLength));
+
 
         WarrantyEntry we = new WarrantyEntry();
 
@@ -119,8 +124,9 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
 
                 MainActivity.sql.updateProduct(we);
 
-                NavHostFragment.findNavController(DeleteFragment.this)
-                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
+                getActivity().onBackPressed();
+//                NavHostFragment.findNavController(DeleteFragment.this)
+//                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
             }
         });
 
@@ -129,16 +135,18 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
             public void onClick(View v) {
                 we.setId(valueId);
                 MainActivity.sql.deleteProduct(we);
-                NavHostFragment.findNavController(DeleteFragment.this)
-                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
+                getActivity().onBackPressed();
+//                NavHostFragment.findNavController(DeleteFragment.this)
+//                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
             }
         });
 
         binding.buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(DeleteFragment.this)
-                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
+                getActivity().onBackPressed();
+//                NavHostFragment.findNavController(DeleteFragment.this)
+//                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
             }
         });
     }

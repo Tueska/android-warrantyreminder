@@ -26,7 +26,11 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
+
+    private Fragment parentFragment;
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         public TextView nameProduct;
         public TextView nameStore;
         public TextView namePurchaseDate;
@@ -41,21 +45,14 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
             this.namePurchaseDate = (TextView) itemView.findViewById(R.id.product_PurchaseDate);
             this.nameRemainingTime = (TextView) itemView.findViewById(R.id.product_RemainingTime);
             this.productBackdrop = (ImageView) itemView.findViewById(R.id.product_Backdrop);
-
-            this.productBackdrop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: Open Settings of Item
-                    System.out.println("HEJJJ");
-                }
-            });
         }
     }
 
     private List<WarrantyEntry> productList;
 
-    public ProductAdapter(List<WarrantyEntry> productList) {
+    public ProductAdapter(List<WarrantyEntry> productList, Fragment fragment) {
         this.productList = productList;
+        this.parentFragment = fragment;
     }
 
     @Override
@@ -102,7 +99,7 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
                 bundle.putLong("expireDate", we.getWarrantyExpireDate());
                 bundle.putInt("warrantyLength", we.getWarrantyLength());
                 bundle.putInt("warrantyLengthType", we.getWarrantyTypeLength());
-                NavHostFragment.findNavController(DataModel.firstFragment)
+                NavHostFragment.findNavController(parentFragment)
                         .navigate(R.id.action_FirstFragment_to_DeleteFragment, bundle);
             }
         });

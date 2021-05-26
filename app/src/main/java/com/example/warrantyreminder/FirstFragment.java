@@ -33,13 +33,10 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        List<WarrantyEntry> wes = MainActivity.sql.getAllProducts();
-//        binding.textviewFirst.setText(wes.toString());
-
         RecyclerView sv = (RecyclerView) getView().findViewById(R.id.productList);
         List<WarrantyEntry> products = MainActivity.sql.getAllProducts();
 
-        this.productAdapter = new ProductAdapter(products);
+        this.productAdapter = new ProductAdapter(products, this);
         sv.setAdapter(this.productAdapter);
         sv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
