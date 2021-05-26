@@ -30,7 +30,7 @@ public class ProductListFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
+        getActivity().setTitle("Warranty expire list");
         binding = FragmentProductlistBinding.inflate(inflater, container, false);
         return binding.getRoot();
 

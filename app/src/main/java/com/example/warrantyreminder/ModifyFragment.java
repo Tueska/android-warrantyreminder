@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -79,7 +80,7 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
         this.viewDeleteButton = getView().findViewById(R.id.deleteButton);
         this.viewDeleteButton.setVisibility(this.valueModify ? View.VISIBLE : View.INVISIBLE);
 
-
+        getActivity().setTitle(this.valueModify ? "Modify warranty entry" : "Create warranty entry");
 
         this.viewColor.setBackgroundTintList(ColorStateList.valueOf(this.valueColor));
         this.viewPickerColor.setBackgroundTintList(ColorStateList.valueOf(this.valueColor));
@@ -123,15 +124,17 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
                         break;
                 }
                 we.setWarrantyExpireDate(cal.getTime().getTime());
-                System.out.println(we);
+
+                if(!valueModify && we.getProduct().isEmpty()) {
+                    Toast.makeText(binding.getRoot().getContext(), "No Product given!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if(valueModify) {
                     MainActivity.sql.updateProduct(we);
                 } else {
                     MainActivity.sql.addProduct(we);
                 }
-
-
                 getActivity().onBackPressed();
             }
         });
