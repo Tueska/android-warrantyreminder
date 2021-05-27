@@ -1,5 +1,7 @@
 package com.example.warrantyreminder;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -144,9 +146,14 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
         binding.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                we.setId(valueId);
-                MainActivity.sql.deleteProduct(we);
-                getActivity().onBackPressed();
+                new AlertDialog.Builder(view.getContext()).setTitle("Remove").setMessage("Delete warranty entry?").setIcon(R.drawable.ic_delete).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        we.setId(valueId);
+                        MainActivity.sql.deleteProduct(we);
+                        getActivity().onBackPressed();
+                    }
+                }).setNegativeButton("No", null).show();
             }
         });
 

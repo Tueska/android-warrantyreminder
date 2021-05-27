@@ -1,6 +1,8 @@
 package com.example.warrantyreminder;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -87,6 +89,22 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
         viewHolder.namePurchaseDate.setText("Purchase: " + new SimpleDateFormat("dd MMMM yyyy").format(purchaseDate.getTime()));
         viewHolder.nameRemainingTime.setText(String.format("%s", diff >= 0 ? Long.valueOf(diff) + "d" : "Exp"));
 
+
+        viewHolder.productBackdrop.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                System.out.println(we);
+                new AlertDialog.Builder(v.getContext()).setTitle("Remove").setMessage("Delete warranty entry?").setIcon(R.drawable.ic_delete).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.sql.deleteProduct(we);
+                        parentFragment.getParentFragmentManager().beginTransaction().detach(parentFragment).attach(parentFragment).commit();
+                    }
+                }).setNegativeButton("No", null).show();
+                return false;
+            }
+        });
+
         viewHolder.productBackdrop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +123,8 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
             }
         });
     }
+
+
 
     // Returns the total count of items in the list
     @Override

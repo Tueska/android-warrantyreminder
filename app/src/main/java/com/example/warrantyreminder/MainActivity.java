@@ -45,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
     public void showColorPickerDialog(View view) {
         ColorPicker cp = new ColorPicker(this);
         cp.setRoundColorButton(true);
-        cp.setTitle("Choose a nice color");
+        cp.setTitle("");
         cp.setColors(this.colorList);
+        cp.getDialogViewLayout().setBackgroundColor(getResources().getColor(R.color.black, getTheme()));
 
         ArrayList<String> colorList = this.colorList;
 

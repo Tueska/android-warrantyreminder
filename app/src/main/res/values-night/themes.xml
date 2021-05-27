@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.WarrantyReminder" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#121212</item>
-        <item name="colorPrimaryVariant">#121212</item>
+        <item name="colorPrimary">@color/light_gray</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,7 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/cp_slate</item>
+        <item name="colorAccent">@color/light_gray</item>
+        <item name="colorControlNormal">@color/light_gray</item>
+
     </style>
     <style name="Theme.WarrantyReminder.NoActionBar">
         <item name="windowActionBar">false</item>
