@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -25,7 +27,7 @@ public class ProductListFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        getActivity().setTitle("Warranty expire list");
+        getActivity().setTitle("warranty expire list");
         binding = FragmentProductlistBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -34,8 +36,12 @@ public class ProductListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        TextView warrantyEntryNotifier = view.findViewById(R.id.warrantyEntryNotifier);
         RecyclerView sv = (RecyclerView) getView().findViewById(R.id.productList);
         List<WarrantyEntry> products = MainActivity.sql.getAllProducts();
+        if(products.isEmpty()) {
+            warrantyEntryNotifier.setText("no warranty entries");
+        }
 
         // Lambda Expression → Sorts Arraylist by remaining time
         products.sort((o1, o2) -> (o1.getWarrantyExpireDate() - o2.getWarrantyExpireDate()) < 0 ? -1 : 1);

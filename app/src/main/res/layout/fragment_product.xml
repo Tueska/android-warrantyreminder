@@ -3,31 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/productfragment"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/product_Backdrop"
-        android:layout_width="325dp"
-        android:layout_height="124dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="0dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rectangle"
         android:backgroundTint="@color/cp_slate"
         android:longClickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/product_RemainingTime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/cp_slate" />
 
     <TextView
         android:id="@+id/product_Name"
-        android:layout_width="290dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:shadowColor="@color/black"
         android:shadowDx="0"
         android:shadowDy="0"
@@ -42,9 +44,11 @@
 
     <TextView
         android:id="@+id/product_Store"
-        android:layout_width="290dp"
+        android:layout_width="0dp"
         android:layout_height="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
         android:shadowColor="@color/black"
         android:shadowDx="0"
         android:shadowDy="0"
@@ -73,17 +77,15 @@
 
     <TextView
         android:id="@+id/product_RemainingTime"
-        android:layout_width="69dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:text="100d"
         android:textAlignment="textEnd"
         android:textColor="#838383"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/product_Backdrop"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

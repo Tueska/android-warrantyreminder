@@ -79,7 +79,7 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
         // Check if Create or not
         this.viewDeleteButton = getView().findViewById(R.id.deleteButton);
         this.viewDeleteButton.setVisibility(this.valueModify ? View.VISIBLE : View.INVISIBLE);
-        getActivity().setTitle(this.valueModify ? "Modify warranty entry" : "Create warranty entry");
+        getActivity().setTitle(this.valueModify ? "modify warranty entry" : "create warranty entry");
 
         this.viewColor.setBackgroundTintList(ColorStateList.valueOf(this.valueColor));
         this.viewPickerColor.setBackgroundTintList(ColorStateList.valueOf(this.valueColor));
@@ -97,7 +97,13 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
         binding.fabDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                valueWarrantyLength = Integer.valueOf(viewWarrantyLength.getText().toString());
+                try {
+                    valueWarrantyLength = Integer.valueOf(viewWarrantyLength.getText().toString());
+                } catch (Exception e) {
+                    Toast.makeText(binding.getRoot().getContext(), "number too large!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 we.setId(valueId);
                 we.setProduct(viewProduct.getText().toString());
@@ -126,8 +132,8 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
                 }
                 we.setWarrantyExpireDate(cal.getTime().getTime());
 
-                if(!valueModify && we.getProduct().isEmpty()) {
-                    Toast.makeText(binding.getRoot().getContext(), "No Product given!", Toast.LENGTH_SHORT).show();
+                if(we.getProduct().isEmpty()) {
+                    Toast.makeText(binding.getRoot().getContext(), "no product given!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -143,14 +149,14 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
         binding.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(view.getContext()).setTitle("Remove").setMessage("Delete warranty entry?").setIcon(R.drawable.ic_delete).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(view.getContext()).setTitle("remove").setMessage("delete warranty entry?").setIcon(R.drawable.ic_delete).setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         we.setId(valueId);
                         MainActivity.sql.deleteProduct(we);
                         getActivity().onBackPressed();
                     }
-                }).setNegativeButton("No", null).show();
+                }).setNegativeButton("no", null).show();
             }
         });
 
@@ -160,6 +166,7 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
                 getActivity().onBackPressed();
             }
         });
+
     }
 
     @Override
@@ -177,4 +184,6 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }

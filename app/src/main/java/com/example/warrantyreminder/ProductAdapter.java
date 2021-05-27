@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -76,23 +78,35 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
         purchaseDate.setTimeInMillis(we.getPurchaseDate());
         expireDate.setTimeInMillis(we.getWarrantyExpireDate());
         long diff = TimeUnit.MILLISECONDS.toDays(expireDate.getTime().getTime() - Calendar.getInstance().getTime().getTime());
+        viewHolder.namePurchaseDate.setText("purchase: " + new SimpleDateFormat("dd MMMM yyyy").format(purchaseDate.getTime()).toLowerCase());
+        int years = (int) diff/365;
+        int months = (int) diff/30;
+        String remainingTime;
+        if(years > 0) {
+            remainingTime = "> " + years + "y";
+        }
+        else if(months > 0) {
+            remainingTime = "> " + months + "m";
+        }
+        else {
+            remainingTime = Long.valueOf(diff) == 0 ? "Today" : diff + "d";
+        }
 
-        viewHolder.namePurchaseDate.setText("Purchase: " + new SimpleDateFormat("dd MMMM yyyy").format(purchaseDate.getTime()));
-        viewHolder.nameRemainingTime.setText(String.format("%s", diff >= 0 ? Long.valueOf(diff) + "d" : "Exp"));
+        viewHolder.nameRemainingTime.setText(remainingTime);
 
 
         viewHolder.productBackdrop.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 System.out.println(we);
-                new AlertDialog.Builder(v.getContext()).setTitle("Remove").setMessage("Delete warranty entry?").setIcon(R.drawable.ic_delete).
-                        setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(v.getContext()).setTitle("remove").setMessage("delete warranty entry?").setIcon(R.drawable.ic_delete).
+                        setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MainActivity.sql.deleteProduct(we);
                         parentFragment.getParentFragmentManager().beginTransaction().detach(parentFragment).attach(parentFragment).commit();
                     }
-                }).setNegativeButton("No", null).show();
+                }).setNegativeButton("no", null).show();
                 return false;
             }
         });
