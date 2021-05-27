@@ -4,27 +4,18 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
@@ -94,7 +85,8 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
             @Override
             public boolean onLongClick(View v) {
                 System.out.println(we);
-                new AlertDialog.Builder(v.getContext()).setTitle("Remove").setMessage("Delete warranty entry?").setIcon(R.drawable.ic_delete).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(v.getContext()).setTitle("Remove").setMessage("Delete warranty entry?").setIcon(R.drawable.ic_delete).
+                        setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         MainActivity.sql.deleteProduct(we);

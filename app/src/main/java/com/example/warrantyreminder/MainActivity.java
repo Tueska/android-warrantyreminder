@@ -3,17 +3,11 @@ package com.example.warrantyreminder;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.fragment.app.DialogFragment;
-
 import com.example.warrantyreminder.databinding.ActivityMainBinding;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import petrov.kristiyan.colorpicker.ColorPicker;

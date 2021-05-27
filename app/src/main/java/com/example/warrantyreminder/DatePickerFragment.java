@@ -3,24 +3,16 @@ package com.example.warrantyreminder;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.icu.util.Calendar;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
-
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     private final View mView;
-    private TextView dateDisplay;
 
     public DatePickerFragment(View view) {
         this.mView = view;

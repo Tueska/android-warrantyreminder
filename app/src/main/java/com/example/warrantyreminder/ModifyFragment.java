@@ -13,12 +13,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import com.example.warrantyreminder.databinding.FragmentModifyBinding;
-
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -69,6 +66,7 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Get Views from Fragment
         this.viewColor = getView().findViewById(R.id.colorPurchaseDate);
         this.viewPickerColor = getView().findViewById(R.id.colorPicker);
         this.viewProduct = getView().findViewById(R.id.inputProductName);
@@ -78,10 +76,9 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
         this.viewWarrantyLengthType = getView().findViewById(R.id.inputWarrantySpinner);
         this.viewWarrantyLength = getView().findViewById(R.id.inputWarrantyNumber);
         this.viewBackButton = getView().findViewById(R.id.buttonReturn);
-
+        // Check if Create or not
         this.viewDeleteButton = getView().findViewById(R.id.deleteButton);
         this.viewDeleteButton.setVisibility(this.valueModify ? View.VISIBLE : View.INVISIBLE);
-
         getActivity().setTitle(this.valueModify ? "Modify warranty entry" : "Create warranty entry");
 
         this.viewColor.setBackgroundTintList(ColorStateList.valueOf(this.valueColor));

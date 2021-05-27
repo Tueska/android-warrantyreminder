@@ -1,11 +1,9 @@
 package com.example.warrantyreminder;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -14,11 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warrantyreminder.databinding.FragmentProductlistBinding;
 
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class ProductListFragment extends Fragment {
 
@@ -42,6 +37,7 @@ public class ProductListFragment extends Fragment {
         RecyclerView sv = (RecyclerView) getView().findViewById(R.id.productList);
         List<WarrantyEntry> products = MainActivity.sql.getAllProducts();
 
+        // Lambda Expression → Sorts Arraylist by remaining time
         products.sort((o1, o2) -> (o1.getWarrantyExpireDate() - o2.getWarrantyExpireDate()) < 0 ? -1 : 1);
 
         this.productAdapter = new ProductAdapter(products, this);
