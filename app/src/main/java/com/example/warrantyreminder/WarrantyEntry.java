@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 
 public class WarrantyEntry {
     private int id;
-    protected String product;
-    protected String store;
-    protected long purchaseDate;
-    protected long warrantyExpireDate;
-    protected int color;
-    protected int warrantyLength;
-    protected int warrantyTypeLength;
+    private String product;
+    private String store;
+    private long purchaseDate;
+    private long warrantyExpireDate;
+    private int color;
+    private int warrantyLength;
+    private int warrantyTypeLength;
 
     public WarrantyEntry() {
 

@@ -42,9 +42,7 @@ public class ProductListFragment extends Fragment {
         RecyclerView sv = (RecyclerView) getView().findViewById(R.id.productList);
         List<WarrantyEntry> products = MainActivity.sql.getAllProducts();
 
-        products.sort((o1, o2) -> {
-            return (o1.getWarrantyExpireDate() - o2.warrantyExpireDate) < 0 ? -1 : 1;
-        });
+        products.sort((o1, o2) -> (o1.getWarrantyExpireDate() - o2.getWarrantyExpireDate()) < 0 ? -1 : 1);
 
         this.productAdapter = new ProductAdapter(products, this);
         sv.setAdapter(this.productAdapter);

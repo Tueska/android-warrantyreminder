@@ -98,6 +98,8 @@ public class ModifyFragment extends Fragment implements AdapterView.OnItemSelect
         binding.fabDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                valueWarrantyLength = Integer.valueOf(viewWarrantyLength.getText().toString());
+
                 we.setId(valueId);
                 we.setProduct(viewProduct.getText().toString());
                 we.setStore(viewStore.getText().toString());
