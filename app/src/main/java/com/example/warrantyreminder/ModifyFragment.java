@@ -1,5 +1,7 @@
 package com.example.warrantyreminder;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,13 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.example.warrantyreminder.databinding.FragmentDeleteBinding;
-
+import com.example.warrantyreminder.databinding.FragmentModifyBinding;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -25,9 +24,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Calendar;
 
-public class DeleteFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class ModifyFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private FragmentDeleteBinding binding;
+    private FragmentModifyBinding binding;
 
     private String valueProduct;
     private String valueStore;
@@ -37,10 +36,12 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
     private int valueWarrantyLength;
     private int valueWarrantyLengthType;
     private int valueId;
+    private boolean valueModify;
 
     private ImageView viewColor;
     private ImageView viewPickerColor;
     private ImageView viewBackButton;
+    private ImageView viewDeleteButton;
     private EditText viewProduct;
     private EditText viewStore;
     private TextView viewPurchaseDate;
@@ -48,7 +49,7 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
     private EditText viewWarrantyLength;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentDeleteBinding.inflate(inflater, container, false);
+        binding = FragmentModifyBinding.inflate(inflater, container, false);
 
         this.valueProduct = getArguments().getString("product");
         this.valueStore = getArguments().getString("store");
@@ -58,12 +59,14 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
         this.valueId = getArguments().getInt("id");
         this.valueWarrantyLength = getArguments().getInt("warrantyLength");
         this.valueWarrantyLengthType = getArguments().getInt("warrantyLengthType");
+        this.valueModify = getArguments().getBoolean("delete");
 
         return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Get Views from Fragment
         this.viewColor = getView().findViewById(R.id.colorPurchaseDate);
         this.viewPickerColor = getView().findViewById(R.id.colorPicker);
         this.viewProduct = getView().findViewById(R.id.inputProductName);
@@ -72,7 +75,11 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
         this.viewBackButton = getView().findViewById(R.id.buttonReturn);
         this.viewWarrantyLengthType = getView().findViewById(R.id.inputWarrantySpinner);
         this.viewWarrantyLength = getView().findViewById(R.id.inputWarrantyNumber);
-
+        this.viewBackButton = getView().findViewById(R.id.buttonReturn);
+        // Check if Create or not
+        this.viewDeleteButton = getView().findViewById(R.id.deleteButton);
+        this.viewDeleteButton.setVisibility(this.valueModify ? View.VISIBLE : View.INVISIBLE);
+        getActivity().setTitle(this.valueModify ? "modify warranty entry" : "create warranty entry");
 
         this.viewColor.setBackgroundTintList(ColorStateList.valueOf(this.valueColor));
         this.viewPickerColor.setBackgroundTintList(ColorStateList.valueOf(this.valueColor));
@@ -83,12 +90,21 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
         this.viewWarrantyLengthType.setSelection(this.valueWarrantyLengthType);
         this.viewWarrantyLength.setText(Integer.toString(this.valueWarrantyLength));
 
+
         WarrantyEntry we = new WarrantyEntry();
 
 
         binding.fabDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    valueWarrantyLength = Integer.valueOf(viewWarrantyLength.getText().toString());
+                } catch (Exception e) {
+                    Toast.makeText(binding.getRoot().getContext(), "number too large!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
                 we.setId(valueId);
                 we.setProduct(viewProduct.getText().toString());
                 we.setStore(viewStore.getText().toString());
@@ -115,32 +131,42 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
                         break;
                 }
                 we.setWarrantyExpireDate(cal.getTime().getTime());
-                System.out.println(we);
 
-                MainActivity.sql.updateProduct(we);
+                if(we.getProduct().isEmpty()) {
+                    Toast.makeText(binding.getRoot().getContext(), "no product given!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                NavHostFragment.findNavController(DeleteFragment.this)
-                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
+                if(valueModify) {
+                    MainActivity.sql.updateProduct(we);
+                } else {
+                    MainActivity.sql.addProduct(we);
+                }
+                getActivity().onBackPressed();
             }
         });
 
         binding.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                we.setId(valueId);
-                MainActivity.sql.deleteProduct(we);
-                NavHostFragment.findNavController(DeleteFragment.this)
-                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
+                new AlertDialog.Builder(view.getContext()).setTitle("remove").setMessage("delete warranty entry?").setIcon(R.drawable.ic_delete).setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        we.setId(valueId);
+                        MainActivity.sql.deleteProduct(we);
+                        getActivity().onBackPressed();
+                    }
+                }).setNegativeButton("no", null).show();
             }
         });
 
         binding.buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(DeleteFragment.this)
-                        .navigate(R.id.action_DeleteFragment_to_FirstFragment);
+                getActivity().onBackPressed();
             }
         });
+
     }
 
     @Override
@@ -158,4 +184,6 @@ public class DeleteFragment extends Fragment implements AdapterView.OnItemSelect
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }

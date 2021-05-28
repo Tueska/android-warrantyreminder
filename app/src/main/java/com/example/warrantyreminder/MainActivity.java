@@ -3,17 +3,11 @@ package com.example.warrantyreminder;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.fragment.app.DialogFragment;
-
 import com.example.warrantyreminder.databinding.ActivityMainBinding;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import petrov.kristiyan.colorpicker.ColorPicker;
@@ -45,19 +39,20 @@ public class MainActivity extends AppCompatActivity {
     public void showColorPickerDialog(View view) {
         ColorPicker cp = new ColorPicker(this);
         cp.setRoundColorButton(true);
-        cp.setTitle("Choose a nice color");
+        cp.setTitle("");
         cp.setColors(this.colorList);
+        cp.getDialogViewLayout().setBackgroundColor(getResources().getColor(R.color.black, getTheme()));
 
-        ArrayList<String> al = this.colorList;
+        ArrayList<String> colorList = this.colorList;
 
         cp.show();
         cp.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
             @Override
             public void onChooseColor(int position, int color) {
-                ImageView iv = view.getRootView().findViewById(R.id.colorPurchaseDate);
-                iv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
-                iv = view.getRootView().findViewById(R.id.colorPicker);
-                iv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(al.get(position))));
+                ImageView colors = view.getRootView().findViewById(R.id.colorPurchaseDate);
+                colors.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(colorList.get(position))));
+                colors = view.getRootView().findViewById(R.id.colorPicker);
+                colors.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(colorList.get(position))));
             }
 
             @Override
@@ -79,5 +74,10 @@ public class MainActivity extends AppCompatActivity {
         this.colorList.add("#3DDC84");
         this.colorList.add("#BE82CA");
         this.colorList.add("#E20639");
+        this.colorList.add("#585481");
+        this.colorList.add("#568EA5");
+        this.colorList.add("#4B3B47");
+        this.colorList.add("#36151E");
+        this.colorList.add("#F08C8E");
     }
 }

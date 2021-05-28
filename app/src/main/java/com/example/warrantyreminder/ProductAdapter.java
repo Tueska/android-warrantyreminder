@@ -1,32 +1,31 @@
 package com.example.warrantyreminder;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
+
+    private Fragment parentFragment;
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         public TextView nameProduct;
         public TextView nameStore;
         public TextView namePurchaseDate;
@@ -41,21 +40,14 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
             this.namePurchaseDate = (TextView) itemView.findViewById(R.id.product_PurchaseDate);
             this.nameRemainingTime = (TextView) itemView.findViewById(R.id.product_RemainingTime);
             this.productBackdrop = (ImageView) itemView.findViewById(R.id.product_Backdrop);
-
-            this.productBackdrop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: Open Settings of Item
-                    System.out.println("HEJJJ");
-                }
-            });
         }
     }
 
     private List<WarrantyEntry> productList;
 
-    public ProductAdapter(List<WarrantyEntry> productList) {
+    public ProductAdapter(List<WarrantyEntry> productList, Fragment fragment) {
         this.productList = productList;
+        this.parentFragment = fragment;
     }
 
     @Override
@@ -86,9 +78,38 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
         purchaseDate.setTimeInMillis(we.getPurchaseDate());
         expireDate.setTimeInMillis(we.getWarrantyExpireDate());
         long diff = TimeUnit.MILLISECONDS.toDays(expireDate.getTime().getTime() - Calendar.getInstance().getTime().getTime());
+        viewHolder.namePurchaseDate.setText("purchase: " + new SimpleDateFormat("dd MMMM yyyy").format(purchaseDate.getTime()).toLowerCase());
+        int years = (int) diff/365;
+        int months = (int) diff/30;
+        String remainingTime;
+        if(years > 0) {
+            remainingTime = "> " + years + "y";
+        }
+        else if(months > 0) {
+            remainingTime = "> " + months + "m";
+        }
+        else {
+            remainingTime = Long.valueOf(diff) == 0 ? "Today" : diff + "d";
+        }
 
-        viewHolder.namePurchaseDate.setText("Purchase: " + new SimpleDateFormat("dd MMMM yyyy").format(purchaseDate.getTime()));
-        viewHolder.nameRemainingTime.setText(String.format("%s", diff >= 0 ? Long.valueOf(diff) + "d" : "Exp"));
+        viewHolder.nameRemainingTime.setText(remainingTime);
+
+
+        viewHolder.productBackdrop.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                System.out.println(we);
+                new AlertDialog.Builder(v.getContext()).setTitle("remove").setMessage("delete warranty entry?").setIcon(R.drawable.ic_delete).
+                        setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.sql.deleteProduct(we);
+                        parentFragment.getParentFragmentManager().beginTransaction().detach(parentFragment).attach(parentFragment).commit();
+                    }
+                }).setNegativeButton("no", null).show();
+                return false;
+            }
+        });
 
         viewHolder.productBackdrop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,11 +123,14 @@ class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>  {
                 bundle.putLong("expireDate", we.getWarrantyExpireDate());
                 bundle.putInt("warrantyLength", we.getWarrantyLength());
                 bundle.putInt("warrantyLengthType", we.getWarrantyTypeLength());
-                NavHostFragment.findNavController(DataModel.firstFragment)
-                        .navigate(R.id.action_FirstFragment_to_DeleteFragment, bundle);
+                bundle.putBoolean("delete", true);
+                NavHostFragment.findNavController(parentFragment)
+                        .navigate(R.id.action_productListFragment_to_modifyFragment, bundle);
             }
         });
     }
+
+
 
     // Returns the total count of items in the list
     @Override
